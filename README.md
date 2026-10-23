@@ -1,59 +1,110 @@
 # 🌱 AgroMarket
 
-**Plataforma de análise e acompanhamento de cotações agrícolas.**
+### Inteligência de mercado para o agronegócio brasileiro
 
-O AgroMarket é um projeto desenvolvido para acompanhar preços de commodities agrícolas, visualizar indicadores de mercado e analisar a variação das cotações ao longo do tempo. A proposta é transformar dados agrícolas em informações úteis para análise e tomada de decisão no agronegócio.
+**O AgroMarket é uma plataforma web para consulta, análise e visualização de cotações agrícolas, desenvolvida para transformar dados de mercado em informações úteis para a tomada de decisão no agronegócio.**
 
-## 🎯 Objetivo
+O projeto combina desenvolvimento backend, banco de dados relacional, APIs REST e visualização de dados em um dashboard voltado ao acompanhamento de preços de commodities agrícolas.
 
-Desenvolver uma plataforma que una tecnologia, análise de dados e agronegócio, facilitando a consulta e a interpretação de cotações agrícolas.
+<p align="center">
+  <strong>Java · Spring Boot · MySQL · JavaScript</strong>
+</p>
 
-## ✨ Funcionalidades
+<p align="center">
+  <a href="https://github.com/matheusvccarvalho/agromarket">Repositório</a> ·
+  <a href="#-funcionalidades">Funcionalidades</a> ·
+  <a href="#-roadmap">Roadmap</a> ·
+  <a href="#-como-executar">Como executar</a>
+</p>
 
-- Consulta de cotações agrícolas por meio de uma API REST.
-- Importação de cotações a partir de arquivos CSV.
-- Cálculo de indicadores de preços, incluindo média, mínimo e máximo.
-- Consulta do histórico de preços por período.
-- Análise de variação absoluta e percentual das cotações.
-- Dashboard interativo com indicadores, gráficos e tabela de cotações.
+---
+
+## 📌 Sobre o projeto
+
+O agronegócio depende de informações de mercado para acompanhar preços, identificar variações e avaliar cenários comerciais. Entretanto, consultar e interpretar dados de diferentes fontes pode ser trabalhoso.
+
+O AgroMarket surge como um projeto de desenvolvimento de software aplicado a esse contexto, reunindo cotações agrícolas, indicadores estatísticos e histórico de preços em uma interface web.
+
+A versão atual possui uma base inicial de cotações de soja do Paraná. A proposta é evoluir gradualmente para uma plataforma com cobertura regional mais ampla, novas commodities e fontes adicionais de dados.
+
+## 🎯 Objetivos
+
+- Centralizar o acesso às cotações agrícolas disponíveis na base do sistema.
+- Facilitar a análise da evolução dos preços ao longo do tempo.
+- Calcular indicadores para apoiar a interpretação do mercado.
+- Desenvolver uma interface simples para explorar informações agrícolas.
+- Aplicar conceitos de engenharia de software, APIs REST, persistência de dados e análise de dados a um problema do agronegócio.
+
+## ✨ Funcionalidades implementadas
+
+### 📊 Dashboard analítico
+
+- Indicadores de preço médio, mínimo e máximo.
+- Visualização do histórico de preços.
+- Análise da variação absoluta e percentual.
+- Tabela com registros de cotações.
 - Filtros por commodity, período e unidade de medida.
+- Consumo dos dados por meio da API REST do backend.
 
-## 🛠️ Tecnologias utilizadas
+### 📥 Importação de dados
 
-| Tecnologia | Aplicação |
+- Importação de cotações por arquivos CSV.
+- Persistência dos registros no banco de dados.
+- Disponibilização das cotações importadas para consulta e análise.
+
+### 🔌 API REST
+
+- Consulta de cotações agrícolas.
+- Endpoints para indicadores e histórico de preços.
+- Cálculo da variação entre cotações.
+- Estrutura organizada em controllers, services, repositories, entities e DTOs.
+
+> **Escopo atual:** o projeto está em desenvolvimento. A cobertura regional ainda é limitada e os resultados dependem dos dados cadastrados no banco. O AgroMarket não deve ser interpretado como uma plataforma de cotações nacionais em tempo real nesta versão.
+
+## 🖥️ Tecnologias e ferramentas
+
+| Tecnologia | Utilização |
 |---|---|
-| Java | Linguagem principal do backend |
-| Spring Boot | Construção da API REST |
-| Spring Data JPA | Persistência e acesso a dados |
-| MySQL | Banco de dados relacional |
+| Java 25 | Desenvolvimento do backend |
+| Spring Boot 4.1.1 | Estrutura da aplicação e API REST |
+| Spring Data JPA | Persistência e acesso aos dados |
+| MySQL 9.6 | Banco de dados relacional |
+| Maven | Gerenciamento de dependências e build |
 | HTML5 | Estrutura da interface |
-| CSS3 | Estilização e identidade visual |
-| JavaScript | Interatividade e integração com a API |
-| Maven | Gerenciamento de dependências e execução |
+| CSS3 | Estilização do dashboard |
+| JavaScript | Interatividade e consumo da API |
+| Python | Script auxiliar de consulta de preços |
 | Git e GitHub | Versionamento e hospedagem do código |
 
-## 📊 Indicadores de mercado
+## 🏗️ Arquitetura
 
-O sistema disponibiliza recursos para analisar:
+A aplicação segue uma organização em camadas, separando as responsabilidades de acesso HTTP, regras de negócio e persistência.
 
-- Preço médio das cotações no período.
-- Menor e maior preço registrado.
-- Evolução histórica dos preços.
-- Variação absoluta e percentual entre cotações.
-- Registros de mercado importados para a base de dados.
+```text
+┌────────────────────────────────────┐
+│          Frontend Web              │
+│       HTML + CSS + JavaScript      │
+└─────────────────┬──────────────────┘
+                  │ HTTP / JSON
+┌─────────────────▼──────────────────┐
+│         API REST                   │
+│       Spring Boot / Java            │
+├────────────────────────────────────┤
+│ Controllers                        │
+│ DTOs                               │
+│ Services                           │
+│ Entities                           │
+│ Repositories                       │
+│ Tratamento global de exceções      │
+└─────────────────┬──────────────────┘
+                  │ JPA / SQL
+┌─────────────────▼──────────────────┐
+│              MySQL                 │
+│     Persistência das cotações      │
+└────────────────────────────────────┘
+```
 
-A base atual contém cotações de soja do Paraná. A expansão para outras regiões e commodities está prevista para evoluções futuras.
-
-## 🏗️ Arquitetura do projeto
-
-O projeto utiliza uma arquitetura com backend e frontend integrados:
-
-- **Backend:** API REST desenvolvida com Java e Spring Boot.
-- **Persistência:** banco de dados MySQL acessado por meio da camada de persistência Java.
-- **Frontend:** interface web construída com HTML, CSS e JavaScript.
-- **Integração:** o frontend consulta os endpoints do backend para exibir os indicadores e as cotações.
-
-### Estrutura principal
+### Estrutura de diretórios
 
 ```text
 agromarket/
@@ -66,26 +117,77 @@ agromarket/
 │   │   │   ├── entity/
 │   │   │   ├── exception/
 │   │   │   ├── repository/
-│   │   │   └── service/
+│   │   │   ├── service/
+│   │   │   └── AgromarketApplication.java
 │   │   └── resources/
 │   │       ├── static/
-│   │       │   ├── css/
-│   │       │   ├── js/
+│   │       │   ├── css/style.css
+│   │       │   ├── js/app.js
 │   │       │   └── index.html
 │   │       └── application.properties
+│   └── test/
 ├── consulta_precos.py
 ├── pom.xml
 ├── mvnw
+├── .gitignore
 └── README.md
 ```
+
+## 📈 Indicadores e análises
+
+O AgroMarket disponibiliza recursos para examinar diferentes aspectos das cotações cadastradas.
+
+| Indicador | Descrição |
+|---|---|
+| Preço médio | Média dos preços considerados na consulta |
+| Preço mínimo | Menor preço registrado no recorte |
+| Preço máximo | Maior preço registrado no recorte |
+| Histórico | Evolução das cotações ao longo do período |
+| Variação absoluta | Diferença entre os preços comparados |
+| Variação percentual | Mudança percentual entre os preços comparados |
+
+A interpretação desses indicadores depende da consistência dos registros, da unidade de medida e do período selecionado.
+
+## 🔌 Endpoints da API
+
+A API local utiliza a base `/api/v1`.
+
+| Método | Endpoint | Finalidade |
+|---|---|---|
+| GET | `/api/v1/quotes` | Consultar cotações |
+| POST | `/api/v1/quotes/import-csv` | Importar cotações por CSV |
+| GET | `/api/v1/analytics/prices` | Consultar indicadores de preços |
+| GET | `/api/v1/analytics/prices/history` | Consultar histórico |
+| GET | `/api/v1/analytics/prices/variation` | Consultar variação de preços |
+
+Exemplo de consulta de indicadores:
+
+```http
+GET /api/v1/analytics/prices?commodity=soja&startDate=2026-10-07&endDate=2026-10-21&unit=BRL%2Fsc60kg
+```
+
+Exemplo de consulta do histórico:
+
+```http
+GET /api/v1/analytics/prices/history?commodity=soja&startDate=2026-10-07&endDate=2026-10-21&unit=BRL%2Fsc60kg
+```
+
+Exemplo de consulta da variação:
+
+```http
+GET /api/v1/analytics/prices/variation?commodity=soja&startDate=2026-10-07&endDate=2026-10-21&unit=BRL%2Fsc60kg
+```
+
+Os parâmetros devem respeitar os nomes e formatos aceitos pelos respectivos endpoints.
 
 ## ⚙️ Como executar
 
 ### Pré-requisitos
 
-- Java instalado em uma versão compatível com o projeto.
+- Java 25 instalado, compatível com a configuração atual do projeto.
 - MySQL instalado e em execução.
 - Git.
+- Acesso ao Terminal.
 
 ### 1. Clonar o repositório
 
@@ -96,11 +198,18 @@ cd agromarket
 
 ### 2. Configurar o banco de dados
 
-Crie um banco de dados MySQL para o projeto e configure a conexão nas propriedades da aplicação.
+Crie um banco de dados MySQL para a aplicação e configure as propriedades de conexão de acordo com o ambiente local.
 
-Defina as credenciais por meio de variáveis de ambiente ou de uma configuração local não versionada. Não publique senhas no repositório.
+Antes de executar, confira `src/main/resources/application.properties` e ajuste:
 
-### 3. Executar a aplicação
+- URL de conexão JDBC.
+- Usuário do banco.
+- Senha do banco.
+- Configurações JPA necessárias para o ambiente.
+
+**Segurança:** não publique credenciais reais no GitHub. Prefira variáveis de ambiente ou uma configuração local fora do controle de versão.
+
+### 3. Iniciar a aplicação
 
 No macOS ou Linux:
 
@@ -109,7 +218,7 @@ chmod +x mvnw
 ./mvnw spring-boot:run
 ```
 
-Se preferir utilizar o Maven instalado:
+Se o Maven já estiver instalado, também é possível utilizar:
 
 ```bash
 mvn spring-boot:run
@@ -117,40 +226,82 @@ mvn spring-boot:run
 
 ### 4. Acessar o dashboard
 
-Após a inicialização, acesse:
+Com a aplicação iniciada, acesse:
 
-http://localhost:8080/
+**http://localhost:8080/**
 
-## 🔌 Endpoints principais
+A interface estática é servida pelo próprio Spring Boot.
 
-| Método | Endpoint | Descrição |
-|---|---|---|
-| GET | `/api/v1/quotes` | Consulta cotações |
-| POST | `/api/v1/quotes/import-csv` | Importa cotações por CSV |
-| GET | `/api/v1/analytics/prices` | Consulta indicadores de preços |
-| GET | `/api/v1/analytics/prices/history` | Consulta histórico de preços |
-| GET | `/api/v1/analytics/prices/variation` | Consulta variação de preços |
+## 🗺️ Roadmap
 
-Os endpoints de análise aceitam parâmetros para filtrar os dados, como commodity, período e unidade de medida.
+O desenvolvimento do AgroMarket será realizado em etapas, priorizando a confiabilidade dos dados e a evolução gradual da plataforma.
 
-## 🚀 Próximas evoluções
+### Fase 1 — Consolidar a versão atual
 
-- Ampliação da cobertura de cotações para diferentes estados brasileiros.
-- Inclusão de novas commodities agrícolas.
-- Integração com fontes adicionais de dados de mercado.
-- Comparação regional de preços.
-- Evolução dos gráficos e indicadores analíticos.
-- Aprimoramento dos filtros e da experiência de utilização.
+- [x] Estruturar o backend com Spring Boot.
+- [x] Integrar o MySQL.
+- [x] Implementar consulta de cotações.
+- [x] Criar importação por CSV.
+- [x] Implementar indicadores de preços.
+- [x] Disponibilizar histórico e variação.
+- [x] Desenvolver o dashboard web.
+- [x] Publicar o código no GitHub.
+
+### Fase 2 — Ampliar a cobertura de mercado
+
+- [ ] Incluir cotações de outras regiões brasileiras.
+- [ ] Expandir a cobertura para soja e milho.
+- [ ] Adicionar filtros por estado e região.
+- [ ] Padronizar unidades de medida.
+- [ ] Identificar origem, data e metodologia de cada cotação.
+- [ ] Avaliar a integração com fontes oficiais e institucionais.
+
+### Fase 3 — Evoluir a inteligência analítica
+
+- [ ] Comparar preços entre regiões.
+- [ ] Criar rankings regionais por commodity.
+- [ ] Adicionar gráficos comparativos e tendências.
+- [ ] Desenvolver indicadores de volatilidade.
+- [ ] Permitir comparações entre diferentes períodos.
+- [ ] Implementar exportação de relatórios.
+
+### Fase 4 — Automatizar a atualização dos dados
+
+- [ ] Criar rotinas automatizadas de coleta.
+- [ ] Implementar validação e prevenção de duplicidades.
+- [ ] Registrar falhas de importação e histórico de atualizações.
+- [ ] Monitorar a atualidade e a qualidade das cotações.
+- [ ] Avaliar notificações para variações relevantes de preços.
+
+### Fase 5 — Preparar para evolução e produção
+
+- [ ] Implementar testes automatizados de serviços e endpoints.
+- [ ] Aprimorar a documentação da API.
+- [ ] Externalizar configurações e segredos.
+- [ ] Adicionar autenticação e controle de acesso, se necessário.
+- [ ] Configurar integração e entrega contínuas (CI/CD).
+- [ ] Avaliar implantação em nuvem e monitoramento.
+
+*As fases futuras são propostas de evolução, não funcionalidades já entregues.*
+
+## 🔭 Visão de futuro
+
+A visão de longo prazo é transformar o AgroMarket em uma plataforma de inteligência de mercado agrícola capaz de consolidar dados de diferentes regiões e fontes, facilitando a comparação de preços e a compreensão dos movimentos do mercado.
+
+Com uma base consistente e histórico suficiente, o projeto poderá explorar análises mais avançadas e ferramentas de apoio à decisão, sempre distinguindo dados observados de estimativas ou previsões.
 
 ## 👨‍💻 Autor
 
 **Matheus Carvalho**
 
-Estudante de Engenharia de Software, interessado em desenvolvimento de sistemas, análise de dados, Business Intelligence e tecnologia aplicada ao agronegócio.
+Estudante de Engenharia de Software, interessado em desenvolvimento backend, análise de dados, Business Intelligence e tecnologia aplicada ao agronegócio.
 
 - GitHub: [@matheusvccarvalho](https://github.com/matheusvccarvalho)
-- Projeto: [AgroMarket](https://github.com/matheusvccarvalho/agromarket)
+- Repositório: [AgroMarket](https://github.com/matheusvccarvalho/agromarket)
 
 ---
 
-*AgroMarket — tecnologia e dados a serviço do agronegócio.* 🌱
+<p align="center">
+  <strong>AgroMarket</strong><br>
+  Tecnologia, dados e inteligência para o agronegócio. 🌱
+</p>
